@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Behavior Logging Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Slider Styles */
+        .slider-container {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .slider-labels .draining {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .slider-labels .filling {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(to right, #e74c3c 0%, #f39c12 50%, #27ae60 100%);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #667eea;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #667eea;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider-value {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        /* Checkbox Styles */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .checkbox-item:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .checkbox-item input[type="checkbox"]:checked + span {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .checkbox-item:has(input:checked) {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-container {
+                margin: 10px;
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>🎯 Behavior Logger</h1>
+        <p class="subtitle">Track your activities and their impact on your well-being</p>
+        
+        <form id="behaviorForm">
+            <!-- Description Field -->
+            <div class="form-group">
+                <label for="description">📝 Activity Description</label>
+                <textarea id="description" name="description" placeholder="Describe the activity or behavior you want to log..." required></textarea>
+            </div>
+
+            <!-- Energy Impact Slider -->
+            <div class="form-group">
+                <label for="energyImpact">⚡ Energy Impact</label>
+                <div class="slider-container">
+                    <div class="slider-labels">
+                        <span class="draining">Draining</span>
+                        <span class="filling">Filling</span>
+                    </div>
+                    <input type="range" id="energyImpact" name="energyImpact" min="1" max="10" value="5">
+                    <div class="slider-value" id="sliderValue">Neutral (5)</div>
+                </div>
+            </div>
+
+            <!-- Wealth Types Checkboxes -->
+            <div class="form-group">
+                <label>💎 Types of Wealth Affected</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="physical" name="wealthTypes" value="physical">
+                        <span>💪 Physical</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="mental" name="wealthTypes" value="mental">
+                        <span>🧠 Mental</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="social" name="wealthTypes" value="social">
+                        <span>👥 Social</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="financial" name="wealthTypes" value="financial">
+                        <span>💰 Financial</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="time" name="wealthTypes" value="time">
+                        <span>⏰ Time</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Time Duration and Frequency in columns -->
+            <div class="form-group">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <label for="timeDuration">⏱️ Time Duration</label>
+                        <select id="timeDuration" name="timeDuration" required>
+                            <option value="">Select duration...</option>
+                            <option value="5-15 minutes">5-15 minutes</option>
+                            <option value="15-30 minutes">15-30 minutes</option>
+                            <option value="30-60 minutes">30-60 minutes</option>
+                            <option value="1-2 hours">1-2 hours</option>
+                            <option value="2-4 hours">2-4 hours</option>
+                            <option value="4-8 hours">4-8 hours</option>
+                            <option value="8+ hours">8+ hours</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="frequency">🔄 Frequency</label>
+                        <select id="frequency" name="frequency" required>
+                            <option value="">Select frequency...</option>
+                            <option value="Multiple times per day">Multiple times per day</option>
+                            <option value="Daily">Daily</option>
+                            <option value="Several times per week">Several times per week</option>
+                            <option value="Weekly">Weekly</option>
+                            <option value="Bi-weekly">Bi-weekly</option>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Occasionally">Occasionally</option>
+                            <option value="Rarely">Rarely</option>
+                            <option value="One-time event">One-time event</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Log Behavior</button>
+        </form>
+    </div>
+
+    <script>
+        // Update slider value display
+        const slider = document.getElementById('energyImpact');
+        const sliderValue = document.getElementById('sliderValue');
+        
+        function updateSliderValue() {
+            const value = parseInt(slider.value);
+            let description = '';
+            let color = '';
+            
+            if (value <= 3) {
+                description = 'Very Draining';
+                color = '#e74c3c';
+            } else if (value <= 4) {
+                description = 'Somewhat Draining';
+                color = '#f39c12';
+            } else if (value == 5) {
+                description = 'Neutral';
+                color = '#95a5a6';
+            } else if (value <= 6) {
+                description = 'Slightly Filling';
+                color = '#f39c12';
+            } else {
+                description = 'Very Filling';
+                color = '#27ae60';
+            }
+            
+            sliderValue.textContent = `${description} (${value})`;
+            sliderValue.style.color = color;
+        }
+        
+        slider.addEventListener('input', updateSliderValue);
+        
+        // Form submission handler
+        document.getElementById('behaviorForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Saving to Google Sheets...';
+            submitBtn.disabled = true;
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const wealthTypes = Array.from(document.querySelectorAll('input[name="wealthTypes"]:checked'))
+                                    .map(cb => cb.value);
+            
+            const data = {
+                description: formData.get('description'),
+                energyImpact: formData.get('energyImpact'),
+                wealthTypes: wealthTypes,
+                timeDuration: formData.get('timeDuration'),
+                frequency: formData.get('frequency'),
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                // Send to Google Apps Script https://script.google.com/macros/s/AKfycbzbpR4Xa2GZhZ9H61IHQtXm7BEnxp1Zjr4psQod-vcr49VAcDO46hYg7UKGLF-yv2I/exec
+                const response = await fetch('https://script.google.com/macros/s/AKfycbzbpR4Xa2GZhZ9H61IHQtXm7BEnxp1Zjr4psQod-vcr49VAcDO46hYg7UKGLF-yv2I/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    alert('✅ Behavior logged successfully to Google Sheets!');
+                    // Reset form
+                    this.reset();
+                    updateSliderValue();
+                } else {
+                    throw new Error(result.message || 'Unknown error');
+                }
+                
+            } catch (error) {
+                alert('❌ Error saving data: ' + error.message);
+                console.error('Error:', error);
+            } finally {
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+        
+        // Initialize slider value
+        updateSliderValue();
+    </script>
+</body>
+</html>
