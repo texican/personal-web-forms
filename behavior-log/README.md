@@ -1,4 +1,4 @@
-# Behavior Logging Form - Google Apps Script Edition
+# Behavior Logging Form
 
 ![Google Apps Script](https://img.shields.io/badge/Google%20Apps%20Script-4285f4?style=flat&logo=google&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
