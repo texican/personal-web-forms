@@ -1,0 +1,6 @@
+[submodule "chess-tracker"]
+	path = chess-tracker
+	url = https://github.com/texican/chess-tracker.git
+[submodule "behavior-log"]
+	path = behavior-log
+	url = https://github.com/texican/behavior-log.git
