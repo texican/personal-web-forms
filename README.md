@@ -4,7 +4,7 @@ A collection of web-based forms I've built to make my daily life more organized 
 
 ## 📋 Available Forms
 
-### 🎯 [Behavior Logger](behavior-log/)
+### 🎯 [Behavior Logger](https://github.com/texican/behavior-log)
 Track your daily activities and see how they impact your energy and well-being. Built for Google Apps Script with easy deployment.
 
 **Features:**
@@ -15,7 +15,7 @@ Track your daily activities and see how they impact your energy and well-being. 
 
 [→ View setup instructions](behavior-log/README.md)
 
-### ♟️ [Chess Game Tracker](chess-tracker/)
+### ♟️ [Chess Game Tracker](https://github.com/texican/chess-tracker)
 Log your chess games and analyze your performance over time. Track ratings, openings, and results across all platforms.
 
 **Features:**
