@@ -4,21 +4,56 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This repository contains Google Apps Script web applications for personal data collection forms. The current project is a behavior logging form (`behavior-log/`) designed specifically for reliable deployment on Google Apps Script.
+This repository contains Google Apps Script web applications for personal data collection forms. Projects are organized as git submodules for independent development and versioning.
 
 ## Project Structure
 
 ```
 Personal Web Forms/
+├── .gitmodules                  # Git submodule configuration
 ├── README.md                    # High-level project overview
-└── behavior-log/                # Behavior tracking form application
+├── CLAUDE.md                    # Repository-level developer guidance
+├── behavior-log/                # Git submodule: Behavior tracking form
+│   ├── README.md                # Detailed deployment instructions
+│   ├── CLAUDE.md                # Project-specific developer guidance
+│   ├── code.gs                  # Server-side Google Apps Script code
+│   ├── index.html               # Complete HTML form with inline CSS/JS
+│   ├── appsscript.json          # Google Apps Script configuration
+│   ├── CHANGELOG.md             # Version history
+│   └── LICENSE                  # MIT license
+└── chess-tracker/               # Git submodule: Chess game tracker
     ├── README.md                # Detailed deployment instructions
-    ├── CLAUDE.md                # Existing developer guidance
+    ├── CLAUDE.md                # Project-specific developer guidance
     ├── code.gs                  # Server-side Google Apps Script code
     ├── index.html               # Complete HTML form with inline CSS/JS
     ├── appsscript.json          # Google Apps Script configuration
-    ├── CHANGELOG.md             # Version history
     └── LICENSE                  # MIT license
+```
+
+## Repository Architecture
+
+This repository uses **git submodules** to organize independent web form projects:
+
+- **behavior-log**: https://github.com/texican/behavior-log.git
+- **chess-tracker**: https://github.com/texican/chess-tracker.git
+
+Each submodule is a standalone repository that can be developed, versioned, and released independently while being part of this collection.
+
+### Working with Submodules
+
+**Clone repository with submodules:**
+```bash
+git clone --recursive https://github.com/texican/personal-web-forms.git
+```
+
+**Update submodules to latest:**
+```bash
+git submodule update --remote
+```
+
+**Add new submodule:**
+```bash
+git submodule add <repository-url> <directory-name>
 ```
 
 ## Development Workflow
@@ -69,7 +104,9 @@ This codebase follows **proven Google Apps Script patterns** for maximum reliabi
 - External API calls and CORS requests
 - Modern JavaScript frameworks
 
-### Core Components
+### Common Architecture Patterns
+
+All projects in this repository follow the same Google Apps Script architecture:
 
 **Server-Side (`code.gs`):**
 - `doGet()`: Serves HTML form with proper headers
@@ -80,8 +117,7 @@ This codebase follows **proven Google Apps Script patterns** for maximum reliabi
 **Client-Side (`index.html`):**
 - Single-file HTML with inline CSS and JavaScript
 - Form validation with floating error messages
-- Energy impact slider (-5 to +5 scale)
-- Wealth type checkboxes (Physical, Mental, Social, Financial, Time)
+- Project-specific form fields
 - Responsive design with dark mode support
 
 ### Configuration Management
@@ -95,10 +131,13 @@ Users can set `SPREADSHEET_ID` in Google Apps Script Project Settings → Script
 
 ### Data Storage
 
-Form submissions are stored in Google Sheets with columns:
-- Timestamp | Description | Energy Impact | Wealth Types | Time Duration | Frequency | Time of Day
+Each project stores form submissions in Google Sheets:
 
-Auto-creates "Behavior Log Data" spreadsheet if none specified.
+**Behavior Logger:** Timestamp | Description | Energy Impact | Wealth Types | Time Duration | Frequency | Time of Day
+
+**Chess Tracker:** Timestamp | Opponent | Result | My Rating | Opponent Rating | Time Control | Platform | Opening | Notes
+
+Spreadsheets are auto-created if none specified.
 
 ## Troubleshooting Common Issues
 

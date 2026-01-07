@@ -14,3 +14,16 @@ Track your daily activities and see how they impact your energy and well-being. 
 - Mobile-friendly responsive design
 
 [→ View setup instructions](behavior-log/README.md)
+
+### ♟️ [Chess Game Tracker](chess-tracker/)
+Log your chess games and analyze your performance over time. Track ratings, openings, and results across all platforms.
+
+**Features:**
+- Complete game logging with opponent, result, and ratings
+- Time control support (Bullet to Correspondence)
+- Opening tracking and game notes
+- Rating progress monitoring (0-4000 range)
+- Multi-platform support (Chess.com, Lichess, OTB, etc.)
+- Automatic Google Sheets integration
+
+[→ View setup instructions](chess-tracker/README.md)
