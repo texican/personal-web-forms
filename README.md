@@ -13,7 +13,7 @@ Track your daily activities and see how they impact your energy and well-being. 
 - Automatic data storage in Google Sheets
 - Mobile-friendly responsive design
 
-[→ View setup instructions](behavior-log/README.md)
+[→ View setup instructions](https://github.com/texican/behavior-log#readme)
 
 ### ♟️ [Chess Game Tracker](https://github.com/texican/chess-tracker)
 Log your chess games and analyze your performance over time. Track ratings, openings, and results across all platforms.
@@ -26,4 +26,4 @@ Log your chess games and analyze your performance over time. Track ratings, open
 - Multi-platform support (Chess.com, Lichess, OTB, etc.)
 - Automatic Google Sheets integration
 
-[→ View setup instructions](chess-tracker/README.md)
+[→ View setup instructions](https://github.com/texican/chess-tracker#readme)
